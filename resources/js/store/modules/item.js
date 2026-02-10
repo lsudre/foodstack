@@ -21,7 +21,7 @@ export const item = {
         pagination: function (state) {
             return state.pagination
         },
-        page: function(state) {
+        page: function (state) {
             return state.page;
         },
         show: function (state) {
@@ -39,7 +39,7 @@ export const item = {
                     url = url + appService.requestHandler(payload);
                 }
                 axios.get(url).then((res) => {
-                    if(typeof payload.vuex === "undefined" || payload.vuex === true) {
+                    if (typeof payload.vuex === "undefined" || payload.vuex === true) {
                         context.commit('lists', res.data.data);
                         context.commit('page', res.data.meta);
                         context.commit('pagination', res.data);
@@ -95,12 +95,7 @@ export const item = {
                 axios
                     .post(
                         `/admin/item/change-image/${payload.id}`,
-                        payload.form,
-                        {
-                            headers: {
-                                "Content-Type": "multipart/form-data",
-                            },
-                        }
+                        payload.form
                     )
                     .then((res) => {
                         context.commit("show", res.data.data);
@@ -120,7 +115,7 @@ export const item = {
                 if (payload) {
                     url = url + appService.requestHandler(payload);
                 }
-                axios.get(url, {responseType: 'blob'}).then((res) => {
+                axios.get(url, { responseType: 'blob' }).then((res) => {
                     resolve(res);
                 }).catch((err) => {
                     reject(err);
@@ -146,10 +141,10 @@ export const item = {
                 });
             });
         },
-        details: function (context,payload) {
+        details: function (context, payload) {
             return new Promise((resolve, reject) => {
                 let url = `admin/item/details/${payload}`;
-                axios.get(url,payload).then((res) => {
+                axios.get(url, payload).then((res) => {
                     resolve(res);
                 }).catch((err) => {
                     reject(err);
@@ -165,7 +160,7 @@ export const item = {
             state.pagination = payload;
         },
         page: function (state, payload) {
-            if(typeof payload !== "undefined" && payload !== null) {
+            if (typeof payload !== "undefined" && payload !== null) {
                 state.page = {
                     from: payload.from,
                     to: payload.to,
@@ -180,7 +175,7 @@ export const item = {
             state.temp.temp_id = payload;
             state.temp.isEditing = true;
         },
-        reset: function(state) {
+        reset: function (state) {
             state.temp.temp_id = null;
             state.temp.isEditing = false;
         }
