@@ -1,4 +1,4 @@
-var staticCacheName = "pwa-v" + new Date().getTime();
+var staticCacheName = "pwa-v" + new Date().getTime(); // Updated to force cache refresh
 var filesToCache = [
     '/offline.html',
     '/css/app.css',

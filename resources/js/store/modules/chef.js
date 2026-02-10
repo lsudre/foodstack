@@ -132,7 +132,7 @@ export const chef = {
                 if (payload) {
                     url = url + appService.requestHandler(payload);
                 }
-                axios.get(url, {responseType: 'blob'}).then((res) => {
+                axios.get(url, { responseType: 'blob' }).then((res) => {
                     resolve(res);
                 }).catch((err) => {
                     reject(err);
@@ -159,12 +159,7 @@ export const chef = {
                 axios
                     .post(
                         `/admin/chef/change-image/${payload.id}`,
-                        payload.form,
-                        {
-                            headers: {
-                                "Content-Type": "multipart/form-data",
-                            },
-                        }
+                        payload.form
                     )
                     .then((res) => {
                         context.commit("show", res.data.data);
@@ -182,14 +177,14 @@ export const chef = {
                     url = url + appService.requestHandler(payload.search);
                 }
                 axios.get(url).then((res) => {
-                        if (typeof payload.vuex === "undefined" || payload.vuex === true) {
-                            context.commit("myOrders", res.data.data);
-                            context.commit("orderPage", res.data.meta);
-                            context.commit("orderPagination", res.data);
-                        }
+                    if (typeof payload.vuex === "undefined" || payload.vuex === true) {
+                        context.commit("myOrders", res.data.data);
+                        context.commit("orderPage", res.data.meta);
+                        context.commit("orderPagination", res.data);
+                    }
 
-                        resolve(res);
-                    })
+                    resolve(res);
+                })
                     .catch((err) => {
                         reject(err);
                     });

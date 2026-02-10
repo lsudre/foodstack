@@ -114,9 +114,9 @@ export const administrator = {
                     context.commit("show", res.data.data);
                     resolve(res);
                 })
-                .catch((err) => {
-                    reject(err);
-                });
+                    .catch((err) => {
+                        reject(err);
+                    });
             });
         },
         reset: function (context) {
@@ -129,7 +129,7 @@ export const administrator = {
                 if (payload) {
                     url = url + appService.requestHandler(payload);
                 }
-                axios.get(url, {responseType: 'blob'}).then((res) => {
+                axios.get(url, { responseType: 'blob' }).then((res) => {
                     resolve(res);
                 }).catch((err) => {
                     reject(err);
@@ -138,23 +138,18 @@ export const administrator = {
         },
         changePassword: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.post(`/admin/administrator/change-password/${payload.id}`,payload.form).then((res) => {
+                axios.post(`/admin/administrator/change-password/${payload.id}`, payload.form).then((res) => {
                     context.dispatch("show", payload.id).then().catch();
                     resolve(res);
                 })
-                .catch((err) => {
-                    reject(err);
-                 });
+                    .catch((err) => {
+                        reject(err);
+                    });
             });
         },
         changeImage: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.post(`/admin/administrator/change-image/${payload.id}`, payload.form, {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
-                    }
-                ).then((res) => {
+                axios.post(`/admin/administrator/change-image/${payload.id}`, payload.form).then((res) => {
                     context.commit("show", res.data.data);
                     resolve(res);
                 }).catch((err) => {
@@ -169,14 +164,14 @@ export const administrator = {
                     url = url + appService.requestHandler(payload.search);
                 }
                 axios.get(url).then((res) => {
-                        if (typeof payload.vuex === "undefined" || payload.vuex === true) {
-                            context.commit("myOrders", res.data.data);
-                            context.commit("orderPage", res.data.meta);
-                            context.commit("orderPagination", res.data);
-                        }
+                    if (typeof payload.vuex === "undefined" || payload.vuex === true) {
+                        context.commit("myOrders", res.data.data);
+                        context.commit("orderPage", res.data.meta);
+                        context.commit("orderPagination", res.data);
+                    }
 
-                        resolve(res);
-                    })
+                    resolve(res);
+                })
                     .catch((err) => {
                         reject(err);
                     });
