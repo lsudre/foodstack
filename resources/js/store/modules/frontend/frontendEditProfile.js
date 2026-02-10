@@ -4,7 +4,7 @@ import appService from "../../../services/appService";
 export const frontendEditProfile = {
     namespaced: true,
     state: {
-        profile : {},
+        profile: {},
     },
     getters: {
         profile: function (state) {
@@ -24,12 +24,7 @@ export const frontendEditProfile = {
         },
         changeImage: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.post(`/profile/change-image`, payload.form, {
-                        headers: {
-                            "Content-Type": "multipart/form-data",
-                        },
-                    }
-                ).then((res) => {
+                axios.post(`/profile/change-image`, payload.form).then((res) => {
                     context.commit("profile", res.data.data);
                     resolve(res);
                 }).catch((err) => {
@@ -39,13 +34,13 @@ export const frontendEditProfile = {
         },
         changePassword: function (context, payload) {
             return new Promise((resolve, reject) => {
-                axios.put(`/profile/change-password`,payload).then((res) => {
+                axios.put(`/profile/change-password`, payload).then((res) => {
                     context.commit("profile", res.data.data);
                     resolve(res);
                 })
-                .catch((err) => {
-                    reject(err);
-                 });
+                    .catch((err) => {
+                        reject(err);
+                    });
             });
         },
     },
